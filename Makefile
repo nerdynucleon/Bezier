@@ -1,6 +1,6 @@
 CC = g++
 ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
-	CFLAGS = -g -DGL_GLEXT_PROTOTYPES -I./include/ -I/usr/X11/include -DOSX
+	CFLAGS = -g -DGL_GLEXT_PROTOTYPES -I./include/ -I/usr/X11/include -DOSX -std=c++11
 	LDFLAGS = -framework GLUT -framework OpenGL \
     	-L"/System/Library/Frameworks/OpenGL.framework/Libraries" \
     	-lGL -lGLU -lm -lstdc++
@@ -11,12 +11,12 @@ endif
 	
 RM = /bin/rm -f 
 all: main 
-main: example_01.o 
-	$(CC) $(CFLAGS) -o as1 example_01.o $(LDFLAGS) 
-example_01.o: example_01.cpp
-	$(CC) $(CFLAGS) -c example_01.cpp -o example_01.o
+main: bezier.o 
+	$(CC) $(CFLAGS) -o as3 bezier.o $(LDFLAGS) 
+bezier.o: bezier.cpp
+	$(CC) $(CFLAGS) -c bezier.cpp -o bezier.o
 clean: 
-	$(RM) *.o as1
+	$(RM) *.o as3
  
 
 
